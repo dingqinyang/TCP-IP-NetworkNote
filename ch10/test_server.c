@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         {
             printf("子进程的 serv_sock：%d,clnt_sock:%d\n", serv_sock, clnt_sock);
             close(serv_sock); //关闭服务器套接字，因为从父进程传递到了子进程
-            while ((str_len = read(clnt_sock, buf, BUFSIZ)) != 0)
+            while ((str_len = read(clnt_sock, buf, BUF_SIZE)) != 0)
                 write(clnt_sock, buf, str_len);
 
             close(clnt_sock);
