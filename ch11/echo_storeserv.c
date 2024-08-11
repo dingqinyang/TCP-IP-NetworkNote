@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
         char msgbuf[BUF_SIZE];
         int i, len;
         for (int i = 0; i < 10; i++)
-        {
+        {     
             len = read(fds[0], msgbuf, BUF_SIZE);
             fwrite((void *)msgbuf, 1, len, fp);
         }
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
         if (pid == 0) //子进程运行区域,此部分向客户端提供回声服务
         {
             close(serv_sock); //关闭服务器套接字，因为从父进程传递到了子进程
-            while ((str_len = read(clnt_sock, buf, BUFSIZ)) != 0)
+            while ((str_len = read(clnt_sock, buf, BUF_SIZE)) != 0)
             {
                 write(clnt_sock, buf, str_len);
                 write(fds[1], buf, str_len);
