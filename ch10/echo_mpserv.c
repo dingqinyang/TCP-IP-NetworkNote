@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
     sigemptyset(&act.sa_mask);
     act.sa_flags = 0;
     state = sigaction(SIGCHLD, &act, 0);         //注册信号处理器,把成功的返回值给 state
+    if (state == -1) {
+        error_handling("sigaction() error");
+    }
     serv_sock = socket(PF_INET, SOCK_STREAM, 0); //创建服务端套接字
     memset(&serv_adr, 0, sizeof(serv_adr));
     serv_adr.sin_family = AF_INET;
